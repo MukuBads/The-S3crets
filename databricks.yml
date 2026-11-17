@@ -1,0 +1,17 @@
+bundle:
+  name: retail_kpis
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Unity Catalog catalog for all tables. Use "workspace" if CREATE CATALOG is not allowed on Free Edition.
+    default: retail
+
+targets:
+  dev:
+    mode: development          # names get a [dev <user>] prefix; schedules start paused
+    default: true
+    workspace:
+      host: https://REPLACE-WITH-YOUR-WORKSPACE-URL   # P1: paste the Free Edition workspace URL

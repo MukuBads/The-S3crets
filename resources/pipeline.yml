@@ -1,0 +1,30 @@
+resources:
+  pipelines:
+    retail_pipeline:
+      name: retail-pipeline
+      catalog: ${var.catalog}
+      schema: bronze               # default schema; table names below are fully qualified
+      serverless: true             # Free Edition only offers serverless
+      continuous: false            # triggered: runs when started by the job or by hand
+      channel: CURRENT
+      configuration:
+        retail.catalog: ${var.catalog}
+      libraries:
+        - file:
+            path: ../src/pipeline/bronze.py
+        # Add these lines as each owner's file is ready (order doesn't matter, DLT works out dependencies):
+        # - file: { path: ../src/pipeline/silver.py }   # P3
+        # - file: { path: ../src/pipeline/gold.py }     # P4
+        # - file: { path: ../src/pipeline/kpi.py }      # P5
+
+  jobs:
+    retail_every_5_min:
+      name: retail-every-5-min
+      trigger:
+        periodic:
+          interval: 5
+          unit: MINUTES
+      tasks:
+        - task_key: run_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.retail_pipeline.id}
