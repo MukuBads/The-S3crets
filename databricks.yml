@@ -7,7 +7,7 @@ include:
 variables:
   catalog:
     description: Unity Catalog catalog for all tables. Use "workspace" if CREATE CATALOG is not allowed on Free Edition.
-    default: retail
+    default: workspace
 
 targets:
   dev:
