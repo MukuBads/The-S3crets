@@ -1,0 +1,841 @@
+{
+  "snapshot": "2026-11-15",
+  "row_counts_ok": true,
+  "unchanged_files_ok": true,
+  "summary": [
+    {
+      "table": "customers",
+      "rows": 30000,
+      "columns": 8,
+      "target": 30000,
+      "exact_duplicate_rows": 300,
+      "duplicate_pk_rows": 390,
+      "distinct_pk_values_duplicated": 390,
+      "null_pk": 0,
+      "rows_with_injected_issue": 6245,
+      "pct_rows_dirty": 20.82,
+      "clean_rows_pct": 79.18,
+      "target_met": true
+    },
+    {
+      "table": "orders",
+      "rows": 100000,
+      "columns": 5,
+      "target": 100000,
+      "exact_duplicate_rows": 1001,
+      "duplicate_pk_rows": 1300,
+      "distinct_pk_values_duplicated": 1289,
+      "null_pk": 0,
+      "rows_with_injected_issue": 17039,
+      "pct_rows_dirty": 17.04,
+      "clean_rows_pct": 82.96,
+      "target_met": true
+    },
+    {
+      "table": "order_items",
+      "rows": 165190,
+      "columns": 6,
+      "target": "",
+      "exact_duplicate_rows": 1735,
+      "duplicate_pk_rows": 2119,
+      "distinct_pk_values_duplicated": 2119,
+      "null_pk": 0,
+      "rows_with_injected_issue": 21349,
+      "pct_rows_dirty": 12.92,
+      "clean_rows_pct": 87.08,
+      "target_met": ""
+    },
+    {
+      "table": "returns",
+      "rows": 20000,
+      "columns": 4,
+      "target": 20000,
+      "exact_duplicate_rows": 201,
+      "duplicate_pk_rows": 260,
+      "distinct_pk_values_duplicated": 260,
+      "null_pk": 0,
+      "rows_with_injected_issue": 2951,
+      "pct_rows_dirty": 14.76,
+      "clean_rows_pct": 85.24,
+      "target_met": true
+    },
+    {
+      "table": "products",
+      "rows": 300,
+      "columns": 5,
+      "target": "",
+      "exact_duplicate_rows": 0,
+      "duplicate_pk_rows": 0,
+      "distinct_pk_values_duplicated": 0,
+      "null_pk": 0,
+      "rows_with_injected_issue": 0,
+      "pct_rows_dirty": 0.0,
+      "clean_rows_pct": 100.0,
+      "target_met": ""
+    },
+    {
+      "table": "categories",
+      "rows": 6,
+      "columns": 2,
+      "target": "",
+      "exact_duplicate_rows": 0,
+      "duplicate_pk_rows": 0,
+      "distinct_pk_values_duplicated": 0,
+      "null_pk": 0,
+      "rows_with_injected_issue": 0,
+      "pct_rows_dirty": 0.0,
+      "clean_rows_pct": 100.0,
+      "target_met": ""
+    }
+  ],
+  "checks": [
+    {
+      "table": "customers",
+      "column": "email",
+      "check": "invalid email syntax",
+      "category": "invalid_value",
+      "violations": 303,
+      "pct": 1.01,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "email",
+      "check": "non-canonical (case/whitespace)",
+      "category": "inconsistent_format",
+      "violations": 271,
+      "pct": 0.903,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "email",
+      "check": "same email on different customer_id",
+      "category": "duplicate_entity",
+      "violations": 430,
+      "pct": 1.433,
+      "clean_ref_violations": 44
+    },
+    {
+      "table": "customers",
+      "column": "phone_number",
+      "check": "non-canonical but valid number",
+      "category": "inconsistent_format",
+      "violations": 1280,
+      "pct": 4.267,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "phone_number",
+      "check": "invalid phone number",
+      "category": "invalid_value",
+      "violations": 212,
+      "pct": 0.707,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "phone_number",
+      "check": "same phone on different customer_id",
+      "category": "duplicate_entity",
+      "violations": 379,
+      "pct": 1.263,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "name",
+      "check": "case/whitespace anomaly",
+      "category": "inconsistent_format",
+      "violations": 368,
+      "pct": 1.227,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "state",
+      "check": "case/whitespace variant",
+      "category": "inconsistent_format",
+      "violations": 117,
+      "pct": 0.39,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "state",
+      "check": "unknown state / abbreviation / misspelling",
+      "category": "invalid_value",
+      "violations": 247,
+      "pct": 0.823,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "city",
+      "check": "case/whitespace variant",
+      "category": "inconsistent_format",
+      "violations": 221,
+      "pct": 0.737,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "city",
+      "check": "unknown city / legacy alias",
+      "category": "invalid_value",
+      "violations": 246,
+      "pct": 0.82,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "region",
+      "check": "case/whitespace/abbrev variant",
+      "category": "inconsistent_format",
+      "violations": 367,
+      "pct": 1.223,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "region",
+      "check": "outside {NORTH,SOUTH,EAST,WEST}",
+      "category": "invalid_value",
+      "violations": 122,
+      "pct": 0.407,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "region",
+      "check": "region does not match state",
+      "category": "inconsistent_value",
+      "violations": 149,
+      "pct": 0.497,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "signup_date",
+      "check": "parseable but not ISO yyyy-mm-dd",
+      "category": "inconsistent_format",
+      "violations": 452,
+      "pct": 1.507,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "signup_date",
+      "check": "unparseable / impossible date",
+      "category": "invalid_value",
+      "violations": 46,
+      "pct": 0.153,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "signup_date",
+      "check": "in the future (> 2026-11-15)",
+      "category": "incorrect_date",
+      "violations": 61,
+      "pct": 0.203,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "customers",
+      "column": "signup_date",
+      "check": "placeholder / before 2000-01-01",
+      "category": "incorrect_date",
+      "violations": 45,
+      "pct": 0.15,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "customer_id",
+      "check": "non-numeric id",
+      "category": "invalid_value",
+      "violations": 202,
+      "pct": 0.202,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "customer_id",
+      "check": "FK -> customers missing",
+      "category": "referential_integrity",
+      "violations": 809,
+      "pct": 0.809,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "order_date",
+      "check": "parseable but not ISO yyyy-mm-dd",
+      "category": "inconsistent_format",
+      "violations": 4051,
+      "pct": 4.051,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "order_date",
+      "check": "unparseable / impossible date",
+      "category": "invalid_value",
+      "violations": 201,
+      "pct": 0.201,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "order_date",
+      "check": "in the future (> 2026-11-15)",
+      "category": "incorrect_date",
+      "violations": 309,
+      "pct": 0.309,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "order_date",
+      "check": "placeholder / before 2000-01-01",
+      "category": "incorrect_date",
+      "violations": 200,
+      "pct": 0.2,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "order_date",
+      "check": "order before customer signup",
+      "category": "incorrect_date",
+      "violations": 1025,
+      "pct": 1.025,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "order_status",
+      "check": "non-canonical spelling/case",
+      "category": "inconsistent_format",
+      "violations": 3039,
+      "pct": 3.039,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "order_status",
+      "check": "value outside allowed domain",
+      "category": "invalid_value",
+      "violations": 405,
+      "pct": 0.405,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "payment_method",
+      "check": "non-canonical spelling/case",
+      "category": "inconsistent_format",
+      "violations": 3039,
+      "pct": 3.039,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "orders",
+      "column": "payment_method",
+      "check": "value outside allowed domain",
+      "category": "invalid_value",
+      "violations": 302,
+      "pct": 0.302,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "order_id",
+      "check": "FK -> orders missing",
+      "category": "referential_integrity",
+      "violations": 826,
+      "pct": 0.5,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "product_id",
+      "check": "FK -> products missing",
+      "category": "referential_integrity",
+      "violations": 660,
+      "pct": 0.4,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "sku",
+      "check": "non-canonical SKU format",
+      "category": "inconsistent_format",
+      "violations": 4908,
+      "pct": 2.971,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "sku",
+      "check": "malformed SKU",
+      "category": "invalid_value",
+      "violations": 502,
+      "pct": 0.304,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "sku",
+      "check": "SKU does not match product_id",
+      "category": "inconsistent_value",
+      "violations": 818,
+      "pct": 0.495,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "quantity",
+      "check": "non-integer quantity",
+      "category": "invalid_value",
+      "violations": 908,
+      "pct": 0.55,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "quantity",
+      "check": "quantity <= 0 or > 100",
+      "category": "invalid_value",
+      "violations": 1184,
+      "pct": 0.717,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "unit_price",
+      "check": "currency symbol / separators",
+      "category": "inconsistent_format",
+      "violations": 1648,
+      "pct": 0.998,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "unit_price",
+      "check": "non-numeric",
+      "category": "invalid_value",
+      "violations": 0,
+      "pct": 0.0,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "unit_price",
+      "check": "price <= 0",
+      "category": "invalid_value",
+      "violations": 822,
+      "pct": 0.498,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "order_items",
+      "column": "unit_price",
+      "check": "differs from products.price",
+      "category": "inconsistent_value",
+      "violations": 1963,
+      "pct": 1.188,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "order_item_id",
+      "check": "FK -> order_items missing",
+      "category": "referential_integrity",
+      "violations": 121,
+      "pct": 0.605,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "order_item_id",
+      "check": "item returned under >1 return_id",
+      "category": "duplicate_entity",
+      "violations": 197,
+      "pct": 0.985,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "order_item_id",
+      "check": "return on non-Delivered order",
+      "category": "inconsistent_value",
+      "violations": 111,
+      "pct": 0.555,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "check": "parseable but not ISO yyyy-mm-dd",
+      "category": "inconsistent_format",
+      "violations": 810,
+      "pct": 4.05,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "check": "unparseable / impossible date",
+      "category": "invalid_value",
+      "violations": 40,
+      "pct": 0.2,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "check": "in the future (> 2026-11-15)",
+      "category": "incorrect_date",
+      "violations": 75,
+      "pct": 0.375,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "check": "placeholder / before 2000-01-01",
+      "category": "incorrect_date",
+      "violations": 20,
+      "pct": 0.1,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "check": "return before order date",
+      "category": "incorrect_date",
+      "violations": 350,
+      "pct": 1.75,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "check": "same day as order (lag 0)",
+      "category": "incorrect_date",
+      "violations": 1,
+      "pct": 0.005,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "check": "more than 30 days after order",
+      "category": "incorrect_date",
+      "violations": 408,
+      "pct": 2.04,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "refund_amount",
+      "check": "currency symbol / separators",
+      "category": "inconsistent_format",
+      "violations": 162,
+      "pct": 0.81,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "refund_amount",
+      "check": "non-numeric",
+      "category": "invalid_value",
+      "violations": 0,
+      "pct": 0.0,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "refund_amount",
+      "check": "refund <= 0",
+      "category": "invalid_value",
+      "violations": 165,
+      "pct": 0.825,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "returns",
+      "column": "refund_amount",
+      "check": "refund > quantity * unit_price",
+      "category": "inconsistent_value",
+      "violations": 458,
+      "pct": 2.29,
+      "clean_ref_violations": 0
+    },
+    {
+      "table": "products",
+      "column": "category_id",
+      "check": "FK -> categories missing",
+      "category": "referential_integrity",
+      "violations": 0,
+      "pct": 0.0,
+      "clean_ref_violations": 0
+    }
+  ],
+  "nulls": [
+    {
+      "table": "customers",
+      "column": "customer_id",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "customers",
+      "column": "name",
+      "empty_cells": 89,
+      "null_tokens": 32,
+      "null_pct": 0.403
+    },
+    {
+      "table": "customers",
+      "column": "email",
+      "empty_cells": 273,
+      "null_tokens": 95,
+      "null_pct": 1.227
+    },
+    {
+      "table": "customers",
+      "column": "phone_number",
+      "empty_cells": 341,
+      "null_tokens": 119,
+      "null_pct": 1.533
+    },
+    {
+      "table": "customers",
+      "column": "signup_date",
+      "empty_cells": 137,
+      "null_tokens": 45,
+      "null_pct": 0.607
+    },
+    {
+      "table": "customers",
+      "column": "city",
+      "empty_cells": 177,
+      "null_tokens": 69,
+      "null_pct": 0.82
+    },
+    {
+      "table": "customers",
+      "column": "state",
+      "empty_cells": 143,
+      "null_tokens": 41,
+      "null_pct": 0.613
+    },
+    {
+      "table": "customers",
+      "column": "region",
+      "empty_cells": 234,
+      "null_tokens": 73,
+      "null_pct": 1.023
+    },
+    {
+      "table": "orders",
+      "column": "order_id",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "orders",
+      "column": "customer_id",
+      "empty_cells": 381,
+      "null_tokens": 129,
+      "null_pct": 0.51
+    },
+    {
+      "table": "orders",
+      "column": "order_date",
+      "empty_cells": 1139,
+      "null_tokens": 383,
+      "null_pct": 1.522
+    },
+    {
+      "table": "orders",
+      "column": "order_status",
+      "empty_cells": 373,
+      "null_tokens": 134,
+      "null_pct": 0.507
+    },
+    {
+      "table": "orders",
+      "column": "payment_method",
+      "empty_cells": 776,
+      "null_tokens": 234,
+      "null_pct": 1.01
+    },
+    {
+      "table": "order_items",
+      "column": "order_item_id",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "order_items",
+      "column": "order_id",
+      "empty_cells": 367,
+      "null_tokens": 126,
+      "null_pct": 0.298
+    },
+    {
+      "table": "order_items",
+      "column": "product_id",
+      "empty_cells": 376,
+      "null_tokens": 120,
+      "null_pct": 0.3
+    },
+    {
+      "table": "order_items",
+      "column": "sku",
+      "empty_cells": 2452,
+      "null_tokens": 852,
+      "null_pct": 2.0
+    },
+    {
+      "table": "order_items",
+      "column": "quantity",
+      "empty_cells": 602,
+      "null_tokens": 221,
+      "null_pct": 0.498
+    },
+    {
+      "table": "order_items",
+      "column": "unit_price",
+      "empty_cells": 1227,
+      "null_tokens": 425,
+      "null_pct": 1.0
+    },
+    {
+      "table": "returns",
+      "column": "return_id",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "returns",
+      "column": "order_item_id",
+      "empty_cells": 48,
+      "null_tokens": 13,
+      "null_pct": 0.305
+    },
+    {
+      "table": "returns",
+      "column": "return_date",
+      "empty_cells": 295,
+      "null_tokens": 111,
+      "null_pct": 2.03
+    },
+    {
+      "table": "returns",
+      "column": "refund_amount",
+      "empty_cells": 159,
+      "null_tokens": 43,
+      "null_pct": 1.01
+    },
+    {
+      "table": "products",
+      "column": "product_id",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "products",
+      "column": "product_name",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "products",
+      "column": "category_id",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "products",
+      "column": "price",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "products",
+      "column": "cost_price",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "categories",
+      "column": "category_id",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    },
+    {
+      "table": "categories",
+      "column": "category_name",
+      "empty_cells": 0,
+      "null_tokens": 0,
+      "null_pct": 0.0
+    }
+  ],
+  "integrity": [
+    {
+      "file": "categories.csv",
+      "original_sha256": "f5a9b7b5954f3533f936240a5dbbdaf9eebf1106b474d88d5953fe3f4da957dc",
+      "input_zip_match": true,
+      "output_match": true,
+      "output_bytes_equal": true,
+      "clean_reference_match": true,
+      "clean_reference_bytes_equal": true
+    },
+    {
+      "file": "customers.csv",
+      "original_sha256": "fc3ffdb77a81c65a6ff815607ff65809ba15fe434922f7f0b146858c0c65329a",
+      "input_zip_match": true
+    },
+    {
+      "file": "order_items.csv",
+      "original_sha256": "d996addaff952f45536f4eb213e7011a52490fe2a19ac379e85453e600e4c4a9",
+      "input_zip_match": true
+    },
+    {
+      "file": "orders.csv",
+      "original_sha256": "1d8f2ddf7dc68603190fd5a98928915c53d26234b9f560a8d8c399d3619fa1d3",
+      "input_zip_match": true
+    },
+    {
+      "file": "products.csv",
+      "original_sha256": "4be67b4a80597f1065798f5419f02e120fcd1982c9605810c4c98d3bede06641",
+      "input_zip_match": true,
+      "output_match": true,
+      "output_bytes_equal": true,
+      "clean_reference_match": true,
+      "clean_reference_bytes_equal": true
+    },
+    {
+      "file": "returns.csv",
+      "original_sha256": "364fcaa269446b92cc97a6cb24a34350e6e68c1a88a7bc0540c337fa0f65f732",
+      "input_zip_match": true
+    }
+  ],
+  "clean_reference_total_violations": 44
+}

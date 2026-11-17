@@ -1,23 +1,27 @@
-# Config checks that run in CI from minute one; P3/P5 add test_cleansing.py and test_kpis.py next to it.
+# Config checks that run in CI; P3/P5 add test_cleansing.py and test_kpis.py next to it.
+import ast
 import csv
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_state_region_covers_28_states_and_6_regions():
+def test_state_region_has_28_states_in_4_regions():
     rows = list(csv.DictReader(open(ROOT / "conf" / "state_region.csv")))
     assert len(rows) == 28
-    assert {r["region"] for r in rows} == {"North", "South", "East", "West", "Central", "North-East"}
+    assert {r["region"] for r in rows} == {"NORTH", "SOUTH", "EAST", "WEST"}
 
 
-def test_festival_dates_are_in_2026_and_sorted():
-    rows = list(csv.DictReader(open(ROOT / "conf" / "festivals.csv")))
-    dates = [r["festival_date"] for r in rows]
-    assert all(d.startswith("2026-") for d in dates) and dates == sorted(dates)
+def test_state_region_matches_clean_reference():
+    mapping = {r["state"]: r["region"] for r in csv.DictReader(open(ROOT / "conf" / "state_region.csv"))}
+    for r in csv.DictReader(open(ROOT / "data" / "clean_reference" / "customers.csv")):
+        assert mapping[r["state"]] == r["region"], r["customer_id"]
 
 
-def test_bronze_defines_all_six_feeds():
-    src = (ROOT / "src" / "pipeline" / "bronze.py").read_text()
-    for feed in ["categories", "products", "customers", "orders", "order_items", "returns"]:
-        assert f'"{feed}"' in src
+def test_bronze_columns_match_raw_csv_headers():
+    tree = ast.parse((ROOT / "src" / "pipeline" / "bronze.py").read_text())
+    columns = next(ast.literal_eval(n.value) for n in ast.walk(tree)
+                   if isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") == "COLUMNS")
+    for feed, cols in columns.items():
+        header = next(csv.reader(open(ROOT / "data" / "raw" / f"{feed}.csv")))
+        assert header == cols, feed
