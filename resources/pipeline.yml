@@ -9,12 +9,14 @@ resources:
       channel: CURRENT
       configuration:
         retail.catalog: ${var.catalog}
+        spark.sql.legacy.timeParserPolicy: CORRECTED   # silver.py needs NULL (not an error) for unparseable dates
+        retail.gold.digital_payment_methods: "UPI,Net Banking,Loyalty Points"   # team decision; gold.py default omits Loyalty Points
       libraries:
         - file:
             path: ../src/pipeline/bronze.py
         # Add these lines as each owner's file is ready (order doesn't matter, DLT works out dependencies):
-        # - file: { path: ../src/pipeline/silver.py }   # P3
-        # - file: { path: ../src/pipeline/gold.py }     # P4
+        - file: { path: ../src/pipeline/silver.py }   # P3
+        - file: { path: ../src/pipeline/gold.py }     # P4
         # - file: { path: ../src/pipeline/kpi.py }      # P5
 
   jobs:
