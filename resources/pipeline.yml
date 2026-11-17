@@ -21,6 +21,7 @@ resources:
     retail_every_5_min:
       name: retail-every-5-min
       trigger:
+        pause_status: UNPAUSED     # dev mode pauses schedules unless set here; set PAUSED to stop the 5-min runs
         periodic:
           interval: 5
           unit: MINUTES

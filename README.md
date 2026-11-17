@@ -12,4 +12,4 @@ Free tools only: Databricks Free Edition, GitHub Actions, Power BI Desktop.
 6. `databricks bundle validate -t dev && databricks bundle deploy -t dev`
 7. `databricks bundle run retail_pipeline -t dev`  -> 6 Bronze tables appear.
 8. When Silver/Gold/KPI files are ready, uncomment them in `resources/pipeline.yml`, push to main, CI deploys.
-9. Unpause the `retail-every-5-min` job in the Jobs UI after integration.
+9. The `retail-every-5-min` job runs the pipeline every 5 minutes (unpaused in `resources/pipeline.yml`).

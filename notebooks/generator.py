@@ -21,7 +21,7 @@ import pandas as pd
 try:
     dbutils.widgets.text("catalog", "workspace")
     dbutils.widgets.text("rows_per_file", "2000")
-    dbutils.widgets.text("seconds_between_files", "5")
+    dbutils.widgets.text("seconds_between_files", "3")
     dbutils.widgets.text("max_files", "0")           # 0 = run to the end
     dbutils.widgets.dropdown("reset", "no", ["no", "yes"])
     P = {k: dbutils.widgets.get(k) for k in ["catalog", "rows_per_file", "seconds_between_files", "max_files", "reset"]}

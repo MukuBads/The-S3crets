@@ -29,8 +29,8 @@ Warehouse (DirectQuery). CI/CD runs on GitHub Actions + Databricks Asset Bundles
 - **Catalog: `workspace`** (Free Edition default; we cannot create catalogs). Schemas: `landing, bronze, silver, gold, kpi`.
 - Volumes: `/Volumes/workspace/landing/source_csv/` (6 raw CSVs, uploaded), `/Volumes/workspace/landing/files/<feed>/`
   (generator output), `/Volumes/workspace/landing/conf/` (`state_region.csv`).
-- Bundle: `retail_kpis`, target `dev` (development mode: names prefixed `[dev badsewalmukund]`, schedules paused).
-  Pipeline resource `retail_pipeline`; job `retail_every_5_min`.
+- Bundle: `retail_kpis`, target `dev` (development mode: names prefixed `[dev badsewalmukund]`, schedules paused unless set explicitly).
+  Pipeline resource `retail_pipeline`; job `retail_every_5_min` (unpaused, runs the pipeline every 5 minutes).
 - Local machine: macOS, zsh. Use `python3` (no `python`). Don't put inline `#` comments in commands meant for pasting.
 
 ## Commands
@@ -46,7 +46,7 @@ databricks fs cp <local> dbfs:/Volumes/workspace/landing/<volume>/<file> --overw
 ```
 Generator: Workspace → Users → badsewalmukund@gmail.com → `.bundle/retail_kpis/dev/files/notebooks/generator` →
 Serverless → widgets `catalog=workspace`, `max_files=3`, `reset=yes` → Run all. Use `max_files=0`, `reset=no` for the
-full stream (144 files, about 12 min).
+full stream (144 files, one every 3 s, about 7 min).
 
 ## Repo layout and ownership
 
