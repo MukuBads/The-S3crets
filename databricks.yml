@@ -11,7 +11,7 @@ variables:
 
 targets:
   dev:
-    mode: development          # names get a [dev <user>] prefix; schedules start paused
+    mode: development # names get a [dev <user>] prefix; schedules start paused
     default: true
     workspace:
-      host: https://REPLACE-WITH-YOUR-WORKSPACE-URL   # P1: paste the Free Edition workspace URL
+      host: https://dbc-7661af1c-67ef.cloud.databricks.com
