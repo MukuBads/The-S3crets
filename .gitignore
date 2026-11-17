@@ -221,3 +221,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+lake/
+.DS_Store
+.env
+*.parquet
