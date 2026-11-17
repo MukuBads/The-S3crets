@@ -43,24 +43,28 @@ src = {f: pd.read_csv(f"{SRC}/{f}.csv", dtype=str, keep_default_na=False) for f 
 COLS = {f: list(df.columns) for f, df in src.items()}
 
 
-def sort_key(dates: pd.Series) -> pd.Series:
+def sort_key(dates: pd.Series) -> tuple[pd.Series, float]:
     """Best-effort date for ordering only (the pipeline does the real parsing).
-    Unreadable dates get a random position inside the real date range."""
-    d = pd.to_datetime(dates, errors="coerce", format="mixed", dayfirst=True)
+    Unreadable dates get a random position inside the real date range. Also returns the share that parsed."""
+    mixed = {"format": "mixed"} if int(pd.__version__.split(".")[0]) >= 2 else {}   # pandas 1.x parses mixed by default
+    d = pd.to_datetime(dates, errors="coerce", dayfirst=True, **mixed)
     d = d.where((d >= "2023-01-01") & (d <= "2026-11-15"))
     lo, hi = pd.Timestamp("2023-01-01").value, pd.Timestamp("2026-11-15").value
     filler = pd.to_datetime([rng.randint(lo, hi) for _ in range(len(d))])
-    return d.fillna(pd.Series(filler, index=d.index))
+    return d.fillna(pd.Series(filler, index=d.index)), d.notna().mean()
 
 
-orders = src["orders"].assign(_t=lambda x: sort_key(x["order_date"]))
+orders = src["orders"].copy()
+orders["_t"], parsed = sort_key(orders["order_date"])
+if parsed < 0.9:   # only a few % of order dates are really bad; more means date parsing broke
+    raise RuntimeError(f"only {parsed:.0%} of order dates parsed (pandas {pd.__version__})")
 order_t = orders.drop_duplicates("order_id").set_index("order_id")["_t"]
 items = src["order_items"].copy()
 items["_t"] = items["order_id"].map(order_t)
 missing = items["_t"].isna()
-items.loc[missing, "_t"] = sort_key(pd.Series([""] * missing.sum(), index=items.index[missing]))
+items.loc[missing, "_t"] = sort_key(pd.Series([""] * missing.sum(), index=items.index[missing]))[0]
 items["_t"] = pd.to_datetime(items["_t"]) + pd.Timedelta(seconds=1)   # right after their order
-rets = src["returns"].assign(_t=lambda x: sort_key(x["return_date"]))
+rets = src["returns"].assign(_t=lambda x: sort_key(x["return_date"])[0])
 
 stream = pd.concat([orders.assign(_feed="orders"), items.assign(_feed="order_items"),
                     rets.assign(_feed="returns")], ignore_index=True)
